@@ -1,0 +1,52 @@
+#ifndef GAME_H
+#define GAME_H
+
+#include "Ball.h"
+#include "Bar.h"
+#include "Wall.h"
+#include "Structs.h"
+#include "Drawer.h"
+
+
+
+class Game {
+	// class to conatin and manage all screen objects.
+private:
+	bool m_is_game_on;
+
+	Ball m_ball; 
+
+	Wall m_left_wall;
+	Wall m_right_wall;
+	Wall m_up_wall;
+	Wall m_down_wall;
+
+	Bar m_left_bar;
+	Bar m_right_bar;
+
+
+public:
+	Game();
+	static Game& Instance();
+
+	bool check_if_game_is_on();
+	//void quit_game();
+
+	char Read_key_from_user();
+	void input_key_handler(char key);
+	void GetAndHandleKeyPressed();
+	
+	bool is_movement_allowed(Bar& bar, direction direction);
+	void EndGame();
+	bool IsBallAndRightAndLeftWallsCollide();
+
+	void MoveBall();
+
+	bool DoesBallHitUpOrDownWalls();
+	bool DoesBallHitLeftOrRightBars();
+
+	void ChangeBallDirection();
+	void UpdateScreen();
+
+};
+#endif // !GAME_H
