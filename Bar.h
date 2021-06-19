@@ -8,7 +8,10 @@
 
 
 class Bar: public Drawer {
+	//Represents a vertical Bar
+
 private:
+	size_t m_SCREEN_HEIGHT = 30;
 	position m_position_of_upper_point;
 	size_t m_lenght_from_upper_point;
 	char m_symbol_type;
