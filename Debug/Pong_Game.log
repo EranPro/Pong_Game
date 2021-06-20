@@ -1,8 +1,5 @@
-﻿  Bar.cpp
-D:\C++ Projects\Pong_Game\Pong_Game\Pong_Game\Bar.cpp(71,46): warning C4018: '<': signed/unsigned mismatch
+﻿  Game.cpp
+D:\C++ Projects\Pong_Game\Pong_Game\Pong_Game\Game.cpp(241,84): warning C4018: '<=': signed/unsigned mismatch
   Pong_Game.cpp
   Generating Code...
-D:\C++ Projects\Pong_Game\Pong_Game\Pong_Game\Bar.cpp(35): warning C4715: 'Bar::IsMoveAllowed': not all control paths return a value
-Game.obj : error LNK2019: unresolved external symbol "public: __thiscall Ball::Ball(void)" (??0Ball@@QAE@XZ) referenced in function "public: __thiscall Game::Game(void)" (??0Game@@QAE@XZ)
-Game.obj : error LNK2019: unresolved external symbol "public: __thiscall Bar::Bar(void)" (??0Bar@@QAE@XZ) referenced in function "public: __thiscall Game::Game(void)" (??0Game@@QAE@XZ)
-D:\C++ Projects\Pong_Game\Pong_Game\Debug\Pong_Game.exe : fatal error LNK1120: 2 unresolved externals
+  Pong_Game.vcxproj -> D:\C++ Projects\Pong_Game\Pong_Game\Debug\Pong_Game.exe

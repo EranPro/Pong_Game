@@ -4,6 +4,10 @@
 #include <windows.h>
 #include <iostream>
 
+Bar::Bar() {
+
+}
+
  Bar::Bar(position bar_uppoer_point_position, size_t lenght_from_upper_point, char symbol_type) {
 	m_position_of_upper_point = bar_uppoer_point_position;
 	m_symbol_type = symbol_type;
@@ -28,7 +32,7 @@ bool Bar::IsMoveAllowed(direction movement_direction) {
 			return true;
 		}
 		else {
-			return true;
+			return false;
 		}
 		
 	case down:
@@ -67,7 +71,7 @@ std::tuple<bool, struct position> Bar::move_down() {
 std::tuple<bool, struct position> Bar::move_up() {
 	direction movement_direction = up;
 	if (IsMoveAllowed(movement_direction)) {
-		m_position_of_upper_point.y++;
+		m_position_of_upper_point.y--;
 		auto return_tuple = std::make_tuple(true, m_position_of_upper_point);
 		return return_tuple;
 	}
@@ -78,13 +82,21 @@ std::tuple<bool, struct position> Bar::move_up() {
 
 }
 
+size_t Bar::GetBarLenght() {
+
+	return m_lenght_from_upper_point;
+
+}
+
 void Bar::PrintOnScreen() {
 	COORD cursor_position;
 
 	for (int added_y_lenght = 0; added_y_lenght < m_lenght_from_upper_point; added_y_lenght++) {
 		//SetCursorPos(m_position_of_upper_point.x, m_position_of_upper_point.y + added_y_lenght);
+
 		cursor_position.X = m_position_of_upper_point.x;
 		cursor_position.Y = m_position_of_upper_point.y + added_y_lenght;
+
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor_position);
 
 		std::cout << m_symbol_type;

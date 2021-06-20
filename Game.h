@@ -12,7 +12,9 @@
 class Game {
 	// class to conatin and manage all screen objects.
 private:
-	bool m_is_game_on;
+	Game();
+	
+	bool m_is_game_on = true;
 
 	Ball m_ball; 
 
@@ -26,7 +28,7 @@ private:
 
 
 public:
-	Game();
+	
 	static Game& Instance();
 
 	bool check_if_game_is_on();
@@ -38,14 +40,19 @@ public:
 	
 	bool is_movement_allowed(Bar& bar, direction direction);
 	void EndGame();
+
 	bool IsBallAndRightAndLeftWallsCollide();
 
 	void MoveBall();
 
 	bool DoesBallHitUpOrDownWalls();
+
+	bool IsBallInBarRange(Bar bar);
 	bool DoesBallHitLeftOrRightBars();
 
-	void ChangeBallDirection();
+	void ChangeBallXDirection();
+	void ChangeBallYDirection();
+
 	void UpdateScreen();
 
 };

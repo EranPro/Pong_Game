@@ -26,6 +26,7 @@ public:
 
 	char get_symbol_type();
 	struct position get_position();
+	size_t GetBarLenght();
 };
 
 

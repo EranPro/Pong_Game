@@ -8,65 +8,70 @@
 Game::Game() 
 
 {
-	m_is_game_on = true;
-
-
-	position ball_position_of_middle_point = { 60,  15 };
-	char symbol_type = 'O';
-	Ball m_ball = Ball(ball_position_of_middle_point, symbol_type);
-
-	//left wall:
-	position lw_wall_upper_point_position = { 0, 0 };
-	size_t lw_lenght_from_upper_point = 20;
-	char lw_symbol_type = '|';
-	WallType wall_type = vertical ;
 	
-	Wall m_left_wall = Wall(lw_wall_upper_point_position, lw_lenght_from_upper_point, lw_symbol_type, wall_type);
-
-	//right wall:
-	position rw_wall_upper_point_position = { 30, 0 };
-	size_t rw_lenght_from_upper_point = 20;
-	char rw_symbol_type = '|';
-	wall_type = vertical;
-
-	Wall m_right_wall = Wall(rw_wall_upper_point_position, rw_lenght_from_upper_point, rw_symbol_type, wall_type);
-
-	//upper wall:
-	position uw_wall_upper_point_position = { 0, 0 };
-	size_t uw_lenght_from_upper_point = 30;
-	char uw_symbol_type = '-';
-	wall_type = horizental;
-
-	Wall m_up_wall = Wall(uw_wall_upper_point_position, uw_lenght_from_upper_point, uw_symbol_type, wall_type);
-
-	//down wall:
-	position dw_wall_upper_point_position = { 0, 20 };
-	size_t dw_lenght_from_upper_point = 30;
-	char dw_symbol_type = '-';
-	wall_type = horizental;
-
-	Wall m_down_wall = Wall(dw_wall_upper_point_position, dw_lenght_from_upper_point, dw_symbol_type, wall_type);
-
-	//left bar:
-	position lb_bar_upper_point_position = { 10, 0 };
-	size_t lb_lenght_from_upper_point = 20;
-	char lb_symbol_type = '|';
-	
-
-	Bar m_left_bar = Bar(lb_bar_upper_point_position, lb_lenght_from_upper_point, lb_symbol_type);
-
-
-	//right bar:
-	position rb_bar_upper_point_position = { 30, 0 };
-	size_t rb_lenght_from_upper_point = 20;
-	char rb_symbol_type = '|';
-
-	Bar m_right_bar = Bar(rb_bar_upper_point_position, rb_lenght_from_upper_point, rb_symbol_type);
 }
 
 Game& Game::Instance() {
 	
 	static Game sinstance; 
+
+	//m_is_game_on = true;
+
+	//ball:
+	position ball_position_of_middle_point = { 60,  15 };
+	char symbol_type = 'O';
+	sinstance.m_ball = Ball(ball_position_of_middle_point, symbol_type);
+	
+	//left wall:
+	position lw_wall_upper_point_position = { 0, 0 };
+	size_t lw_lenght_from_upper_point = 25;
+	char lw_symbol_type = '|';
+	WallType wall_type = vertical;
+
+	sinstance.m_left_wall = Wall(lw_wall_upper_point_position, lw_lenght_from_upper_point, lw_symbol_type, wall_type);
+
+	//right wall:
+	position rw_wall_upper_point_position = { 117, 0 };
+	size_t rw_lenght_from_upper_point = 25;
+	char rw_symbol_type = '|';
+	wall_type = vertical;
+
+	sinstance.m_right_wall = Wall(rw_wall_upper_point_position, rw_lenght_from_upper_point, rw_symbol_type, wall_type);
+
+	//upper wall:
+	position uw_wall_upper_point_position = { 0, 0 };
+	size_t uw_lenght_from_upper_point = 117;
+	char uw_symbol_type = '-';
+	wall_type = horizental;
+
+	sinstance.m_up_wall = Wall(uw_wall_upper_point_position, uw_lenght_from_upper_point, uw_symbol_type, wall_type);
+
+	//down wall:
+	position dw_wall_upper_point_position = { 0, 25 };
+	size_t dw_lenght_from_upper_point = 117;
+	char dw_symbol_type = '-';
+	wall_type = horizental;
+
+	sinstance.m_down_wall = Wall(dw_wall_upper_point_position, dw_lenght_from_upper_point, dw_symbol_type, wall_type);
+
+	//left bar:
+	position lb_bar_upper_point_position = { 10, 5 };
+	size_t lb_lenght_from_upper_point = 10;
+	char lb_symbol_type = '|';
+
+
+	sinstance.m_left_bar = Bar(lb_bar_upper_point_position, lb_lenght_from_upper_point, lb_symbol_type);
+
+
+	//right bar:
+	position rb_bar_upper_point_position = { 107, 5 };
+	size_t rb_lenght_from_upper_point = 10;
+	char rb_symbol_type = '|';
+
+	sinstance.m_right_bar = Bar(rb_bar_upper_point_position, rb_lenght_from_upper_point, rb_symbol_type);
+
+	
+
 	return sinstance; 
  }
 
@@ -99,7 +104,7 @@ void Game::input_key_handler(char key) {
 		}		
 		break;
 
-	case 's':
+	case 'z':
 		if (is_movement_allowed(m_left_bar, direction = down)) {
 			m_left_bar.move_down();
 		}
@@ -182,6 +187,7 @@ bool Game::IsBallAndRightAndLeftWallsCollide() {
 void Game::UpdateScreen() {
 	system("cls");
 	
+	
 	m_ball.PrintOnScreen();
 
 	m_left_wall.PrintOnScreen();
@@ -202,10 +208,17 @@ void Game::MoveBall() {
 
 }
 
-void Game::ChangeBallDirection() {
+void Game::ChangeBallXDirection() {
 
-	m_ball.ChangeBallDirection();
+	m_ball.ChangeBallXDirection();
 }
+
+
+
+void Game::ChangeBallYDirection() {
+	m_ball.ChangeBallYDirection();
+}
+
 
 bool Game::DoesBallHitUpOrDownWalls()
 {
@@ -222,14 +235,25 @@ bool Game::DoesBallHitUpOrDownWalls()
 	return false;
 }
 
+
+bool Game::IsBallInBarRange(Bar bar) {
+	if (	(m_ball.get_position().x == bar.get_position().x) &&
+			( (m_ball.get_position().y >= bar.get_position().y) && (m_ball.get_position().y <= bar.get_position().y + bar.GetBarLenght() ) )
+		)
+	{
+		return true;
+	}
+	else {
+		return false;
+	}
+
+}
+
+
 bool Game::DoesBallHitLeftOrRightBars()
 {
-	if ((m_ball.get_position().x == m_left_bar.get_position().x) ||
-		(m_ball.get_position().x == m_right_bar.get_position().x)  //||
-		//(m_ball.get_position().y <= m_up_wall.get_position().y)     ||
-		//(m_ball.get_position().y >= m_down_wall.get_position().y)  
-
-		)
+	
+	if ( (IsBallInBarRange(m_left_bar)) || (IsBallInBarRange(m_right_bar)) )
 	{
 		return true;
 	}

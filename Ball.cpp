@@ -5,6 +5,10 @@
 #include<windows.h>
 
 
+Ball::Ball() {
+
+}
+
 Ball::Ball(position ball_position_of_middle_point, char symbol_type) {
 	m_position_of_middle_point = ball_position_of_middle_point;
 	m_symbol_type = symbol_type;
@@ -49,8 +53,11 @@ std::tuple<bool, position> Ball::move_ball() {
 }
 
 
-void Ball::ChangeBallDirection() {
+void Ball::ChangeBallXDirection() {
 	m_ball_direction.x *= -1;
+}
+
+void Ball::ChangeBallYDirection() {
 	m_ball_direction.y *= -1;
 
 }

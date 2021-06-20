@@ -11,7 +11,7 @@ using namespace std;
 
 int main()
 {
-	Game my_game = Game();
+	Game& my_game = Game::Instance();
 
 
 	while (my_game.check_if_game_is_on()) {
@@ -23,10 +23,15 @@ int main()
 
 
 		//check if ball hits bars or up/down walls . If yes- change its direction
-		if (my_game.DoesBallHitUpOrDownWalls() || my_game.DoesBallHitLeftOrRightBars()) {
+		if (my_game.DoesBallHitUpOrDownWalls()) {
 
-			my_game.ChangeBallDirection();
+			my_game.ChangeBallYDirection();
 
+		}
+		
+		if (my_game.DoesBallHitLeftOrRightBars()) {
+
+			my_game.ChangeBallXDirection();
 		}
 
 

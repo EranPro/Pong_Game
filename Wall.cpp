@@ -31,13 +31,33 @@ struct position Wall::get_position() {
 void Wall::PrintOnScreen() {
 	COORD cursor_position;
 	
-	for (int added_y_lenght = 0; added_y_lenght < m_lenght_from_upper_point; added_y_lenght++) {
-		//SetCursorPos(m_position_of_upper_point.x, m_position_of_upper_point.y + added_y_lenght);
-		cursor_position.X = m_position_of_upper_point.x;
-		cursor_position.Y = m_position_of_upper_point.y + added_y_lenght;
-		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor_position);
-		std::cout << m_symbol_type;
+	
+	if (m_wall_type == horizental) {
+		cursor_position.Y = m_position_of_upper_point.y;
+
+		for (int added_lenght = 0; added_lenght < m_lenght_from_upper_point; added_lenght++) {
+			
+			cursor_position.X = m_position_of_upper_point.x + added_lenght; 
+			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor_position);
+			std::cout << m_symbol_type;
+		}
+
 	}
+	
+	else if (m_wall_type == vertical) {
+		cursor_position.X = m_position_of_upper_point.x;
+
+		for (int added_lenght = 0; added_lenght < m_lenght_from_upper_point; added_lenght++) {
+			
+			cursor_position.Y = m_position_of_upper_point.y + added_lenght;
+			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor_position);
+			std::cout << m_symbol_type;
+		}
+	}
+
+
+
+	
 	
 
 

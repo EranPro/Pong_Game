@@ -17,7 +17,10 @@ public:
 	
 	char get_symbol_type();
 	struct position get_position();
-	void ChangeBallDirection();
+
+	void ChangeBallXDirection();
+	void ChangeBallYDirection();
+
 	std::tuple<bool, position> move_ball();
 
 	virtual void PrintOnScreen();
