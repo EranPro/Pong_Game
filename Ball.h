@@ -13,7 +13,7 @@ private:
 	char m_symbol_type;
 public:
 	Ball();
-	Ball(position ball_position_of_middle_point, char symbol_type);
+	Ball(position ball_position_of_middle_point, char symbol_type, movement_direction ball_direction);
 	
 	char get_symbol_type();
 	struct position get_position();

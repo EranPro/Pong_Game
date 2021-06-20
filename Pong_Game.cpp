@@ -5,7 +5,10 @@
 #include "Game.h"
 #include <conio.h>
 #include<windows.h>
+#include <time.h>
+
 #define BALL_DELAY 30
+#define TIME_TO_ADD_BALL 15000;
 
 using namespace std;
 

@@ -6,6 +6,7 @@
 #include "Wall.h"
 #include "Structs.h"
 #include "Drawer.h"
+#include <list>
 
 
 
@@ -26,6 +27,8 @@ private:
 	Bar m_left_bar;
 	Bar m_right_bar;
 
+	std::list<Drawer*> m_drawers_list; //list of drawer object to print
+	std::list<Ball*> m_list_of_balls_pointers;
 
 public:
 	
@@ -54,6 +57,8 @@ public:
 	void ChangeBallYDirection();
 
 	void UpdateScreen();
+
+	void AddBallToList();
 
 };
 #endif // !GAME_H
