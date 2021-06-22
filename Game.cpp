@@ -17,7 +17,8 @@ Game& Game::Instance() {
 
 	//m_is_game_on = true;
 
-	//ball:
+	//ball :
+	//Methos AddBallToList performs also adding of the ball to Drawer list.
 	sinstance.AddBallToList();
 	/*
 	position ball_position_of_middle_point = { 60,  15 };
@@ -90,6 +91,18 @@ Game& Game::Instance() {
 	return sinstance; 
  }
 
+
+Game::~Game() {
+	//delete all balls from heap:
+	for (auto& iter:m_list_of_balls_pointers) {
+		delete(iter);
+	}
+	//delete all drawers objects from heap:
+	for (auto& iter:m_drawers_list) {
+		delete(iter);
+	}
+
+}
 
 char Game::Read_key_from_user() {
 
@@ -184,14 +197,16 @@ void Game::EndGame() {
 }
 
 bool Game::IsBallAndRightAndLeftWallsCollide() { //TO DO: change ball check to list of balls checks
-	if ( (m_ball.get_position().x <= m_left_wall.get_position().x)   ||
-		 (m_ball.get_position().x >= m_right_wall.get_position().x)  //||
-		 //(m_ball.get_position().y <= m_up_wall.get_position().y)     ||
-		 //(m_ball.get_position().y >= m_down_wall.get_position().y)  
+	for (auto&iter:m_list_of_balls_pointers) {
+		//check for each ball from list of it collides with right and left walls:
+		if ((iter->get_position().x <= m_left_wall.get_position().x) ||
+			(iter->get_position().x >= m_right_wall.get_position().x) 
+			)
+		{
+			return true;
+		}
+
 		
-		)
-	{
-		return true;
 	}
 
 	return false;
@@ -250,25 +265,25 @@ void Game::ChangeBallYDirection() {
 }
 
 
-bool Game::DoesBallHitUpOrDownWalls()
+void Game::DoesBallHitUpOrDownWalls()
 {
-	if ((m_ball.get_position().y == m_up_wall.get_position().y) ||
-		(m_ball.get_position().y == m_down_wall.get_position().y)  //||
-		//(m_ball.get_position().y <= m_up_wall.get_position().y)     ||
-		//(m_ball.get_position().y >= m_down_wall.get_position().y)  
+	
+	for (auto& iter:m_list_of_balls_pointers) {
+		if ((iter->get_position().y == m_up_wall.get_position().y) ||
+			(iter->get_position().y == m_down_wall.get_position().y)  
 
-		)
-	{
-		return true;
+			)
+		{
+			iter->ChangeBallYDirection();
+		}
 	}
 
-	return false;
 }
 
 
-bool Game::IsBallInBarRange(Bar bar) {
-	if (	(m_ball.get_position().x == bar.get_position().x) &&
-			( (m_ball.get_position().y >= bar.get_position().y) && (m_ball.get_position().y <= bar.get_position().y + bar.GetBarLenght() ) )
+bool Game::IsBallInBarRange(Bar bar, Ball& ball) {
+	if (	(ball.get_position().x == bar.get_position().x) &&
+			( (ball.get_position().y >= bar.get_position().y) && (ball.get_position().y <= bar.get_position().y + bar.GetBarLenght() ) )
 		)
 	{
 		return true;
@@ -280,15 +295,17 @@ bool Game::IsBallInBarRange(Bar bar) {
 }
 
 
-bool Game::DoesBallHitLeftOrRightBars()
+void Game::DoesBallHitLeftOrRightBars()
 {
-	
-	if ( (IsBallInBarRange(m_left_bar)) || (IsBallInBarRange(m_right_bar)) )
-	{
-		return true;
+	for (auto& iter: m_list_of_balls_pointers) {
+
+		if ((IsBallInBarRange(m_left_bar, *iter)) || (IsBallInBarRange(m_right_bar, *iter)))
+		{
+			iter->ChangeBallXDirection();
+		}
+
 	}
 
-	return false;
 }
 
 void Game::AddBallToList() {

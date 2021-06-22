@@ -1,20 +1,38 @@
 // Pong_Game.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-
 #include "Pong_Game.h"
 #include "Game.h"
 #include <conio.h>
-#include<windows.h>
+#include<windows.h> 
 #include <time.h>
+//#include <unistd.h>
+//#include <pthread.h>
+#include <thread>
 
 #define BALL_DELAY 30
-#define TIME_TO_ADD_BALL 15000;
+#define TIME_TO_ADD_BALL 15000
 
 using namespace std;
 
+//pthread_create(thread, attr, start_routine, arg);
+
+void CreateBalls(Game& my_game) {
+	while (my_game.check_if_game_is_on()) {
+		Sleep(TIME_TO_ADD_BALL);
+		my_game.AddBallToList();
+
+	}
+
+}
+
 int main()
 {
+
+
 	Game& my_game = Game::Instance();
+	
+	std::thread create_balls_thread(CreateBalls, std::ref(my_game));
+	//thread* p_create_balls_thread = &create_balls_thread;
 
 
 	while (my_game.check_if_game_is_on()) {
@@ -26,17 +44,9 @@ int main()
 
 
 		//check if ball hits bars or up/down walls . If yes- change its direction
-		if (my_game.DoesBallHitUpOrDownWalls()) {
-
-			my_game.ChangeBallYDirection();
-
-		}
-		
-		if (my_game.DoesBallHitLeftOrRightBars()) {
-
-			my_game.ChangeBallXDirection();
-		}
-
+		my_game.DoesBallHitUpOrDownWalls();
+		my_game.DoesBallHitLeftOrRightBars();
+	
 
 
 		//Read input from user
@@ -50,9 +60,9 @@ int main()
 
 		Sleep(BALL_DELAY);
 	}
-
+	
+	create_balls_thread.join();
 	my_game.EndGame();
-
-
+	
 	return 0;
 }
