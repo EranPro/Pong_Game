@@ -165,7 +165,6 @@ void Game::GetAndHandleKeyPressed() {
 
 }
 
-
 /*
 void Game::quit_game() {
 	m_is_game_on = false;
@@ -182,9 +181,14 @@ bool Game::check_if_game_is_on() {
 
 
 bool Game::is_movement_allowed(Bar& bar, direction direction) {
+	if (
+		(  (direction == up) && (bar.get_position().y > m_up_wall.get_position().y) ) || //if bar below upper wall AND requested for 'up'
+		 (  (direction == down) && (bar.get_position().y + bar.GetBarLenght() < m_down_wall.get_position().y))
+		)
+	{return true;}
 
+	else { return false; }
 
-	return true;
 }
 
 
