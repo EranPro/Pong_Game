@@ -20,8 +20,8 @@ public:
 	Bar();
 	Bar(position bar_upper_point_position, size_t lenght_from_upper_point, char symbol_type);
 
-	std::tuple<bool, struct position> move_up();
-	std::tuple<bool, struct position> move_down();
+	void move_up();
+	void move_down();
 	void PrintOnScreen();
 
 	char get_symbol_type();

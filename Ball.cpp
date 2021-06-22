@@ -9,11 +9,11 @@ Ball::Ball() {
 
 }
 
-Ball::Ball(position ball_position_of_middle_point, char symbol_type) {
+Ball::Ball(position ball_position_of_middle_point, char symbol_type, movement_direction ball_direction) {
 	m_position_of_middle_point = ball_position_of_middle_point;
 	m_symbol_type = symbol_type;
-	m_ball_direction.x = 1;
-	m_ball_direction.y = 1;
+	m_ball_direction.x = ball_direction.x;
+	m_ball_direction.y = ball_direction.y;
 
 }
 

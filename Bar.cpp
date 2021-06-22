@@ -51,35 +51,28 @@ bool Bar::IsMoveAllowed(direction movement_direction) {
 }
 
 
-std::tuple<bool, struct position> Bar::move_down() {
-	direction movement_direction = down;
-	
-	if (IsMoveAllowed(movement_direction)) {
-		m_position_of_upper_point.y++;
-		auto return_tuple = std::make_tuple(true, m_position_of_upper_point);
-		return return_tuple;
-	}
-	
+void Bar::move_down() {
+
+	m_position_of_upper_point.y++;
+
+	/*
 	else {
 		return std::make_tuple(false, m_position_of_upper_point);
 	}
-
+	*/
 }
 
 
 
-std::tuple<bool, struct position> Bar::move_up() {
-	direction movement_direction = up;
-	if (IsMoveAllowed(movement_direction)) {
-		m_position_of_upper_point.y--;
-		auto return_tuple = std::make_tuple(true, m_position_of_upper_point);
-		return return_tuple;
-	}
+void Bar::move_up() {
 
+	m_position_of_upper_point.y--;
+
+	/*
 	else {
 		return std::make_tuple(false, m_position_of_upper_point);
 	}
-
+	*/
 }
 
 size_t Bar::GetBarLenght() {
