@@ -104,6 +104,21 @@ Game::~Game() {
 
 }
 
+void Game::DeleteHeap()
+{
+//delete all balls from heap:
+	for (auto& iter:m_list_of_balls_pointers) 
+	{
+		delete(iter);
+	}
+	//delete all drawers objects from heap:
+	for (auto& iter:m_drawers_list) 
+	{
+		delete(iter);
+	}
+
+}
+
 char Game::Read_key_from_user() {
 
 	char key = 0;
@@ -194,9 +209,23 @@ bool Game::is_movement_allowed(Bar& bar, direction direction) {
 
 void Game::EndGame() {
 
-	SetCursorPos(20, 20);
-	std::cout << "**** Game Over *****";
+	m_is_game_on = false;
+	
 
+
+}
+
+void Game::PrintGameOver()
+{
+	SetCursorPos(60, 15);
+
+	COORD cursor_position;
+	cursor_position.X = 60;
+	cursor_position.Y = 15;
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor_position);
+
+
+	std::cout << "**** Game Over *****";
 
 }
 

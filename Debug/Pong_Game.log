@@ -1,9 +1,4 @@
-﻿  Bar.cpp
-D:\C++ Projects\Pong_Game\Pong_Game\Pong_Game\Bar.cpp(87,46): warning C4018: '<': signed/unsigned mismatch
-  Drawer.cpp
-  Game.cpp
-D:\C++ Projects\Pong_Game\Pong_Game\Pong_Game\Game.cpp(186,73): warning C4018: '<': signed/unsigned mismatch
-D:\C++ Projects\Pong_Game\Pong_Game\Pong_Game\Game.cpp(290,80): warning C4018: '<=': signed/unsigned mismatch
-  Pong_Game.cpp
-  Generating Code...
+﻿  Game.cpp
+D:\C++ Projects\Pong_Game\Pong_Game\Pong_Game\Game.cpp(201,73): warning C4018: '<': signed/unsigned mismatch
+D:\C++ Projects\Pong_Game\Pong_Game\Pong_Game\Game.cpp(319,80): warning C4018: '<=': signed/unsigned mismatch
   Pong_Game.vcxproj -> D:\C++ Projects\Pong_Game\Pong_Game\Debug\Pong_Game.exe

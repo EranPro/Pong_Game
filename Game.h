@@ -36,6 +36,8 @@ public:
 	
 	static Game& Instance();
 
+	void DeleteHeap();
+
 	bool check_if_game_is_on();
 	//void quit_game();
 
@@ -45,6 +47,7 @@ public:
 	
 	bool is_movement_allowed(Bar& bar, direction direction);
 	void EndGame();
+	void PrintGameOver();
 
 	bool IsBallAndRightAndLeftWallsCollide();
 
